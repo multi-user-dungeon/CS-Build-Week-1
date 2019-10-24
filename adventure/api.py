@@ -18,6 +18,7 @@ def getRooms(request):
     result = ''
     for room in r:
         result += room.__repr__() + ', '
+    result = "[" + result[:-2] + "]"
     return JsonResponse({ 'rooms': result }, safe=True)
 
 @csrf_exempt
