@@ -12,6 +12,20 @@ class Room(models.Model):
     s_to = models.IntegerField(default=0)
     e_to = models.IntegerField(default=0)
     w_to = models.IntegerField(default=0)
+    x = models.IntegerField(default = 0)
+    y = models.IntegerField(default = 0)
+
+
+
+    def __repr__(self):
+        title = self.title
+        n_to = self.n_to
+        s_to = self.s_to
+        w_to = self.w_to
+        e_to = self.e_to
+        return f"{{ title: {self.title}, id: {self.id},  n_to: {self.n_to}, s_to: {self.s_to}, e_to: {self.e_to}, w_to: {self.w_to} }}"
+
+
     def connectRooms(self, destinationRoom, direction):
         destinationRoomID = destinationRoom.id
         try:
