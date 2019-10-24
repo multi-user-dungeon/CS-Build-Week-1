@@ -11,6 +11,15 @@ import json
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_KEY'), secret=config('PUSHER_SECRET'), cluster=config('PUSHER_CLUSTER'))
 
+@api_view(["GET"])
+def getRooms(request):
+    print(request.body)
+    r = Room.objects.all()
+    result = ''
+    for room in r:
+        result += room.__repr__() + ', '
+    return JsonResponse({ 'rooms': result }, safe=True)
+
 @csrf_exempt
 @api_view(["GET"])
 def initialize(request):

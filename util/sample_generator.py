@@ -52,7 +52,7 @@ class World:
         self.height = size_y
         for i in range( len(self.grid) ):
             self.grid[i] = [None] * size_x
-
+            #print(f"{self.grid[i]}")
         # Start from lower-left corner (0,0)
         x = -1 # (this will become 0 on the first step)
         y = 0
@@ -81,11 +81,12 @@ class World:
 
             # Create a room in the given direction
             room = Room(room_count, "A Generic Room", "This is a generic room.", x, y)
+
             # Note that in Django, you'll need to save the room after you create it
 
             # Save the room in the World grid
             self.grid[y][x] = room
-
+            #print(f"room created :{self.grid[y][x]}")
             # Connect the new room to the previous room
             if previous_room is not None:
                 previous_room.connect_rooms(room, room_direction)
@@ -93,7 +94,6 @@ class World:
             # Update iteration variables
             previous_room = room
             room_count += 1
-
 
 
     def print_rooms(self):
@@ -110,9 +110,11 @@ class World:
         # We reverse it so it draws in the right direction.
         reverse_grid = list(self.grid) # make a copy of the list
         reverse_grid.reverse()
+        print(f"{reverse_grid}")
         for row in reverse_grid:
             # PRINT NORTH CONNECTION ROW
             str += "#"
+
             for room in row:
                 if room is not None and room.n_to is not None:
                     str += "  |  "
@@ -152,9 +154,9 @@ class World:
 
 
 w = World()
-num_rooms = 44
-width = 8
-height = 7
+num_rooms = 99
+width = 10
+height = 10
 w.generate_rooms(width, height, num_rooms)
 w.print_rooms()
 
